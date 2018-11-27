@@ -3,10 +3,12 @@ const path = require('path');
 const fs = require('fs');
 const assert = require('assert');
 const checkExistsWithTimeout = require('../../utils/checkIfExistsWithTimeout');
+const DownloadPage = require('../pageObjects/download.page');
+
 
 describe('Downloads', () => {
     it('should download the file', () => {
-        browser.url('./download');
+        DownloadPage.open;
         const downloadLink = $('*=some-file.txt');
         downloadLink.click();
         const downloadHref = downloadLink.getAttribute('href');
