@@ -5,13 +5,8 @@ var LoginPage = Object.create(Page, {
     form: {get: function() {return browser.$('.fa.fa-2x.fa-sign-in')}},
     flash: {get: function() {return browser.$('#flash')}},
 
-    open: { value: function() {
-        Page.open.call(this, 'login'); 
-    }},
-
-    submit: {value: function(){
-        this.form.submitForm();
-    }}
+    open: {get: function() {return Page.open.call(this, 'login');}},
+    submit: {get: function() {return browser.click('.radius');}}
 });
 
 module.exports = LoginPage;

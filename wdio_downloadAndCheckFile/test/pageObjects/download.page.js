@@ -1,10 +1,7 @@
 var Page = require('./page');
 
 var DownloadPage = Object.create(Page, {
-
-    open: { value: function() {
-        Page.open.call(this, 'download'); 
-    }},   
+    open: {get: function() {return browser.url('/' + 'download');}}
 });
 
 module.exports = DownloadPage;
