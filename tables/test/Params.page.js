@@ -9,9 +9,17 @@ class Api {
         return this.table.elements('tbody tr');
     }
 
-    getParamName (rowIndex){
-        //name for specific row
+    getNames (){
         return this.table.elements('tbody tr td:first-child');
+    }
+
+    getNamesText(){
+        let names = this.getNames().getText();
+
+        return names.map(function(text){
+            return text.replace('optional', '').trim();
+        });
+
     }
     
 
