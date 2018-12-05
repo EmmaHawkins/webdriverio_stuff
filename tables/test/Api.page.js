@@ -6,7 +6,7 @@ class Api {
         this.path = path;
     }
 
-    get paramsTable () {return new Params('#Parameters + table')};
+    get params () {return new Params('#Parameters + table')};
 
     open() {
         browser.url('/api/' + this.path + '.html');
