@@ -1,28 +1,3 @@
-const path = require('path');
-const fs = require('fs');
-
-global.downloadDir = path.join(__dirname, 'tempDownloads')
-
-
-var rmdir = function(dir) {
-	var list = fs.readdirSync(dir);
-	for(var i = 0; i < list.length; i++) {
-		var filename = path.join(dir, list[i]);
-		var stat = fs.statSync(filename);
-		
-		if(filename == "." || filename == "..") {
-			// pass these files
-		} else if(stat.isDirectory()) {
-			// rmdir recursively
-			rmdir(filename);
-		} else {
-			// rm fiilename
-			fs.unlinkSync(filename);
-		}
-	}
-	fs.rmdirSync(dir);
-};
-
 exports.config = {
     
     //
@@ -35,11 +10,11 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/**/*spec.js'
+        './test/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
-        // 'path/to/excluded/files'
+        './test/**/*.page.js'
     ],
     //
     // ============
@@ -70,11 +45,7 @@ exports.config = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        chromeOptions: {
-            prefs: {
-                'download.default_directory' : downloadDir
-            }
-        }
+        
     }],
     //
     // ===================
@@ -107,7 +78,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://the-internet.herokuapp.com',
+    baseUrl: 'http://webdriver.io',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -176,11 +147,11 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: function (config, capabilities) {
-        if(!fs.existsSync(downloadDir)){
-            fs.mkdirSync(downloadDir)
-        }
-    },
+    // onPrepare: function (config, capabilities) {
+    //     if(!fs.existsSync(downloadDir)){
+    //         fs.mkdirSync(downloadDir)
+    //     }
+    // },
     /**
      * Gets executed just before initialising the webdriver session and test framework. It allows you
      * to manipulate configurations depending on the capability or spec.
@@ -275,7 +246,7 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onComplete: function(exitCode, config, capabilities) {
-        rmdir(downloadDir)
-    }
+    // onComplete: function(exitCode, config, capabilities) {
+    //     rmdir(downloadDir)
+    // }
 }
