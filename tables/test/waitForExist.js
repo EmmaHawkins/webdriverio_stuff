@@ -4,6 +4,7 @@ let Api = require('./Api.page');
 
 describe('The waitForExist API Page', function() {
     let page;
+
     beforeEach(function() {   
         page = new Api('utility/waitForExist');
         page.open();  
@@ -15,7 +16,7 @@ describe('The waitForExist API Page', function() {
     });
 
     it('should have a params table', function() {
-        expect(page.params.isExisting).to.be.true;     
+        expect(page.params.table.isExisting()).to.be.true;     
 
     });
 
