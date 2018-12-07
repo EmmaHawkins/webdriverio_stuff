@@ -24,7 +24,18 @@ describe('The waitForExist API Page', function() {
 
     it('should have "selector", "ms" and "reverse" parameter', function(){
         expect(page.params.getNamesText()).to.deep.equal(['selector', 'ms', 'reverse'])
-    });
+    }); 
+
+    it('should have state that "ms" and "reverse" are optional', function(){
+        expect(page.params.getOptionalParamsNames()).to.deep.equal(['ms', 'reverse']);
+    }); 
+
+    it.only('should list "selector" as the first parameter', function(){
+        const row = page.params.getRow(0);
+        console.log(row);
+
+        expect(row).to.deep.equal(['selector','String', 'element selector to wait for']);
+    }); 
 
 
 

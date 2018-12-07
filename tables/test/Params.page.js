@@ -15,11 +15,24 @@ class Api {
 
     getNamesText(){
         let names = this.getNames().getText();
-
         return names.map(function(text){
             return text.replace('optional', '').trim();
         });
+    }
 
+    getOptionalParamsNames(){
+        let names = this.getNames().getText();
+        let filteredNames = names.filter(function(text){
+            return text.includes('optional');
+        });
+        return filteredNames.map(function(text){
+            return text.replace('optional', '').trim();
+        });
+    }
+
+    getRow(index){
+        const row = this.getParams(index);
+        return row.elements('td').getText();
     }
     
 
